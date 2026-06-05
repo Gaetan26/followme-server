@@ -38,7 +38,7 @@ def set_takeoff(data: TakingOffData):
     mqtt_client.disconnect()
     
     return {
-        "topic": data.topic,
+        "topic": topic,
         "takeoff": True
     }
 
@@ -53,6 +53,6 @@ def set_landing(data: LandingData):
     mqtt_client.disconnect()
     
     return {
-        "topic": data.topic,
+        "topic": topic,
         "landing": True
     }
