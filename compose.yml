@@ -3,14 +3,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: followme
     env_file:
       - app/.env
-    labels:
-      - "traefik.http.routers.brainpdfpython.rule=Host(`followme.localhost`)"
-      - "traefik.http.routers.brainpdfpython.entrypoints=web"
+    ports:
+      - "8000:8000"
     networks:
       - proxy
-    container_name: followme
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.followme.rule=Host(`followme-api.0xgaetan.dev`)"
+      - "traefik.http.services.followme.loadbalancer.server.port=8000"
+      - "traefik.http.routers.followme.tls.certresolver=myresolver"
 
 networks:
   proxy:
