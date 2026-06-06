@@ -13,7 +13,7 @@ def index():
     return { "hello": "world" }
 
 @app.post("/follow")
-def set_position(data: PositionData):
+async def set_position(data: PositionData):
     position = { "lat": data.lat, "lng": data.lng }
 
     mqtt_client.connect(MQTT_BROKER, MQTT_PORT, keepalive=2)
@@ -28,7 +28,7 @@ def set_position(data: PositionData):
     }
 
 @app.post("/takeoff")
-def set_takeoff(data: TakingOffData):
+async def set_takeoff(data: TakingOffData):
     topic = data.topic + "/takeoff"
     
     mqtt_client.connect(MQTT_BROKER, MQTT_PORT, keepalive=2)
@@ -43,7 +43,7 @@ def set_takeoff(data: TakingOffData):
     }
 
 @app.post("/landing")
-def set_landing(data: LandingData):
+async def set_landing(data: LandingData):
     topic = data.topic + "/landing"
 
     mqtt_client.connect(MQTT_BROKER, MQTT_PORT, keepalive=2)
